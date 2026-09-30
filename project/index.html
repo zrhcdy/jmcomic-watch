@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            http-equiv="Cache-Control"
+            content="max-age=60, must-revalidate"
+        />
+        <title>最新</title>
+        <link rel="stylesheet" href="./style/basic.css" />
+        <link rel="stylesheet" href="./style/latest.css" />
+    </head>
+    <body>
+        <div class="root">
+            <nav class="nav">
+                <div class="page-list-btn">
+                    <div class="btn-inner"></div>
+                    <div class="btn-inner"></div>
+                    <div class="btn-inner"></div>
+                </div>
+                <div class="search">
+                    <form>
+                        <input type="search" placeholder="搜索" />
+                    </form>
+                </div>
+            </nav>
+            <nav class="mob-nav">
+                <div class="mn-inner">
+                    <a class="mn-item active" href="#"> -主页- </a>
+                    <a class="mn-item" href="./favorite.html"> 收藏 </a>
+                    <a class="mn-item" href="./history.html"> 历史 </a>
+                    <a class="mn-item" href="./setting.html"> 设置 </a>
+                </div>
+            </nav>
+            <div class="body">
+                <div class="latest-cr"></div>
+            </div>
+            <div class="chapter">
+                <div class="fold-btn">图集(20/209)</div>
+                <div class="image-cr">
+                </div>
+            </div>
+        </div>
+        <script type="module" src="./src/pages/latest.js"></script>
+    </body>
+</html>
