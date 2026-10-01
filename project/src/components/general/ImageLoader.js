@@ -37,6 +37,15 @@ export class ImageLoader {
                         this.chapter.id,
                         image.dataset.path,
                     );
+                    this.loadedImages++;
+
+                    if (this.loadedImages < this.chapter.images.length) {
+                        this.containerDom.appendChild(
+                            this.createImageDom(
+                                this.chapter.images[this.loadedImages],
+                            ),
+                        );
+                    }
                 }
             },
             { rootMargin: "50px" },
@@ -50,12 +59,6 @@ export class ImageLoader {
         let container = img.parentNode;
         container.removeChild(container.children[0]);
         container.style.height = null;
-        this.loadedImages++;
-        if (this.loadedImages < this.chapter.images.length) {
-            this.containerDom.appendChild(
-                this.createImageDom(this.chapter.images[this.loadedImages]),
-            );
-        }
 
         if (this.chapter.id >= 220980 && !path.endsWith(".gif")) {
             container.removeChild(container.children[0]);
@@ -90,7 +93,9 @@ export class ImageLoader {
                 retryCount,
             );
         };
-        this.intersectionObserver.observe(iDom);
+        requestAnimationFrame(()=>{
+            this.intersectionObserver.observe(iDom);
+        })
         this.resizeObserver.observe(img);
         iDom.appendChild(span);
         iDom.appendChild(img);
