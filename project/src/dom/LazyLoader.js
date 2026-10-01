@@ -17,6 +17,21 @@ class LazyLoader {
     }
     addCover(coverEle){
         this.observer.observe(coverEle)
+        const coverImg = coverEle.children[0];
+        let retryCount = 0;
+        coverImg.onerror = () => {
+            if(retryCount > 5){
+                coverImg.onerror = null;
+                return
+            }
+            retryCount++;
+            coverImg.src = null;
+            coverImg.src = coverEle.dataset.src;
+        }
+        coverImg.onload = () => {
+            coverImg.onerror = null;
+            coverImg.onload = null;
+        }
     }
     clear(){
         this.observer.disconnect()

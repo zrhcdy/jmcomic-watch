@@ -5,6 +5,7 @@ export class ImageLoader {
     containerDom;
     chapter;
     cutter;
+    loadedImages = 0;
     constructor(containerDom, chapter) {
         this.containerDom = containerDom;
         this.chapter = chapter;
@@ -14,9 +15,9 @@ export class ImageLoader {
             for (let entry of entries) {
                 let imgCr = entry.target.parentNode;
                 let img = entry.target;
-                if(!imgCr){
+                if (!imgCr) {
                     this.resizeObserver.unobserve(img);
-                    return
+                    return;
                 }
                 if (img.height > 40) {
                     this.resizeObserver.unobserve(img);
@@ -27,29 +28,33 @@ export class ImageLoader {
         this.intersectionObserver = new IntersectionObserver(
             (entries) => {
                 for (let entry of entries) {
-                    if (entry.isIntersecting) {
-                        let image = entry.target;
-                        if (!image.dataset.beginload) {
-                            image.dataset.beginload = "true";
-                            image.children[1].src = jmApi.getChapterImageURL(
-                                this.chapter.id,
-                                image.dataset.path,
-                            );
-                        }
-                    }
+                    if (!entry.isIntersecting) return;
+                    let image = entry.target;
+                    if (image.dataset.beginload) return;
+                    image.dataset.beginload = "true";
+                    this.intersectionObserver.unobserve(image);
+                    image.children[1].src = jmApi.getChapterImageURL(
+                        this.chapter.id,
+                        image.dataset.path,
+                    );
                 }
             },
             { rootMargin: "50px" },
         );
 
-        this.chapter.images.forEach((path) => {
-            this.containerDom.appendChild(this.createImageDom(path));
-        })
+        this.containerDom.appendChild(
+            this.createImageDom(this.chapter.images[this.loadedImages]),
+        );
     }
     imageOnLoad(img, path) {
         let container = img.parentNode;
         container.removeChild(container.children[0]);
         container.style.height = null;
+        this.loadedImages++;
+        this.containerDom.appendChild(
+            this.createImageDom(this.chapter.images[this.loadedImages]),
+        );
+
         if (this.chapter.id >= 220980 && !path.endsWith(".gif")) {
             container.removeChild(container.children[0]);
             container.appendChild(
