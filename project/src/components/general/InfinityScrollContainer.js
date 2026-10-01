@@ -20,8 +20,7 @@ export class InfinityScrollContainer {
         this.loadContent = loadContent;
         this.coolingTime = coolingTime;
         this.isGlobalContainer = isGlobalContainer
-    }
-    init() {
+
         this.addEvent();
         this.#onScroll();
     }

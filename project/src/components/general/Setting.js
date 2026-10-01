@@ -1,6 +1,6 @@
 class Setting{
     #settingValues={
-        using_imgserver_index:["0","1","2","3","4","5"]
+        using_imgserver_index:["0","1"]
     }
 
     #options={

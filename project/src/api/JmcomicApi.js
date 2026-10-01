@@ -11,11 +11,7 @@ class JmcomicApi {
     servers; // API服务器列表
     // 图片服务器列表，用于获取漫画图片
     imgServers = [
-        "cdn-msp.jmapiproxy1.cc",
         "cdn-msp.jmapiproxy2.cc",
-        "cdn-msp2.jmapiproxy2.cc",
-        "cdn-msp3.jmapiproxy2.cc",
-        "cdn-msp.jmapinodeudzn.net",
         "cdn-msp3.jmapinodeudzn.net",
     ];
     

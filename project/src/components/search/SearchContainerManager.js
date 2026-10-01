@@ -35,6 +35,8 @@ export class SearchContainerManager {
             coolingTime: 500,
             loadContent: (page) => this.loadContent(page),
         });
+
+        this.#addEvent();
     }
     debounce(func, wait, context) {
         let timeout;
@@ -52,10 +54,6 @@ export class SearchContainerManager {
 
     }
     research = this.debounce(this._research, 300, this);
-    init() {
-        this.scrollContainer.init();
-        this.#addEvent();
-    }
     async loadContent(page) {
         this.loadingIconDom.style.display = "block";
         if (
@@ -110,6 +108,11 @@ export class SearchContainerManager {
                 this.research();
             });
         }
+        this.containerDom.addEventListener("click", (e) => {
+            if (e.target.tagName == "IMG") {
+                this.onClickComicItem(e);
+            }
+        });
     }
     #getComicsCr(list) {
         const cr = document.createElement("div");
@@ -122,10 +125,9 @@ export class SearchContainerManager {
             .map(
                 (c) => `
             <div class="comic-item">
-                <a class="cover" data-src="${jmApi.getCoverImageURL(c.id)}" href="./chapter.html?id=${c.id}" target="_blank">
+                <div class="cover" data-id=${c.id}>
                     <img alt="封面"/>
-                    <div class="tags"></div>
-                </a>
+                </div>
                 <h1 class="c-title">${c.name}</h1>
                 <h2 class="c-sr-title">${c.author}</h2>
             </div>
@@ -133,4 +135,5 @@ export class SearchContainerManager {
             )
             .join("");
     }
+    onClickComicItem(e){}
 }

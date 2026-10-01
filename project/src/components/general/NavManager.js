@@ -12,8 +12,7 @@ export class NavManager{
         this.mobNavInner=this.mobileNavDom.children[0]
         this.searchForm=this.navDom.querySelector(".search form")
         this.searchInput=this.searchForm.children[0]
-    }
-    init(){
+
         this.#addEvent()
     }
     #addEvent(){

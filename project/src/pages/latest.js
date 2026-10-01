@@ -1,4 +1,5 @@
 import { jmApi } from "../api/JmcomicApi.js";
+import { ChapterManager } from "../components/general/ChapterManager.js";
 import { NavManager } from "../components/general/NavManager.js";
 import { setting } from "../components/general/Setting.js";
 import { LatestContainerManager } from "../components/latest/LatestContainerManager.js";
@@ -6,18 +7,18 @@ import { LatestContainerManager } from "../components/latest/LatestContainerMana
 class LatestPage {
     navManager
     latestContainerManager
-    switchServerBtnManager
+    chapterManager
     constructor() {}
     async init() {
         setting.init()
         await jmApi.init();
         this.latestContainerManager=new LatestContainerManager()
-        this.latestContainerManager.init()
-
         this.navManager=new NavManager()
-        this.navManager.init()
+        this.chapterManager=new ChapterManager()
 
-        
+        this.latestContainerManager.onClickComicItem=(e)=>{
+            this.chapterManager.openChapter(e.target.parentNode.dataset.id)
+        }
     }
 }
 const app = new LatestPage();

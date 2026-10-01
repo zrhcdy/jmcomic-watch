@@ -1,9 +1,9 @@
 .body{
     width: 100%;
-    padding: 20px 10%;
+    padding: 10px 20px;
 }
 .b-title{
-    font-size: 35px;
+    font-size: 30px;
     color: #ff77a5;
     font-weight: 400;
 }
@@ -23,67 +23,44 @@
 }
 .search-cr{
     width: 100%;
-    height: auto;
 }
-.comics-cr{
-    display: flex;
-    justify-content: space-around;
-    gap: 10px;
-    flex-wrap: wrap;
-    width: 100%;
-    height: auto;
-    margin-top: 20px;
-}
-.comic-item{
-    width: 210px;
+.comic-item {
+    width: calc(50% - 5px);
     height: 100%;
     flex-grow: 0;
     flex-shrink: 0;
-    /* float: left; */
 }
-.comic-item .cover{
+.cover {
     display: block;
     position: relative;
     width: 100%;
-    height: 270px;
-    cursor: pointer;
+    height: 165px;
 }
-.comic-item .cover img{
+.cover img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 5px;
 }
-.tags{
-    position: absolute;
+.comics-cr {
     display: flex;
+    justify-content: space-around;
     flex-wrap: wrap;
-    width:90%;
-    height: auto;
-    left: 5%;
-    bottom: 5%;
+    width: 100%;
     gap: 10px;
+    margin-top: 10px;
 }
-.tag{
-    width: auto;
-    /* height: 16px; */
-    padding: 3px 6px;
-    font-size: 10px;
-    background-color: #F48FB1;
-    border-radius: 13px;
-    color: #ffffff;
-}
-.c-title{
+.c-title {
     width: 100%;
     height: 25px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 400;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.c-sr-title{
-    font-size: 16px;
+.c-sr-title {
+    font-size: 14px;
     font-weight: 300;
     width: 100%;
     height: 23px;
@@ -91,50 +68,64 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-@media screen and (max-width:812px){
-    .body{
-        padding: 20px 5%;
-    }
+.chapter {
+    z-index: 100;
+    position: fixed;
+    left: 0;
+    top:0;
+    transform: translateY(100%);
+    width: 100%;
+    height: 100%;
+    background-color: #fdd8e0;
+    transition: transform .3s ease;
 }
-@media screen and (max-width:722px){
-    .comic-item{
-        width: calc(33.3% - 6.6px);
-    }
+.fold-btn {
+    width: 100%;
+    height: 40px;
+    background-color: #fc7c92;
+    color: #fff;
+    line-height: 40px;
+    text-align: center;
 }
-@media screen and (max-width:650px){
-    .comic-item .cover{
-        height: 240px;
-    }
+.image-cr {
+    width: 100%;
+    height: calc(100% - 40px);
+    overflow-y: scroll;
 }
-@media screen and (max-width:560px){
-    .comic-item .cover{
-        height: 210px;
-    }
-    .c-title{
-        font-size: 17px;
-    }
-    .c-sr-title{
-        font-size: 14px;
-    }
+.image{
+    height: auto;
+    position: relative;
 }
-@media screen and (max-width:460px){
-    .comics-cr{
-        gap:5px;
-    }
-    .comic-item{
-        width: calc(33.3% - 3.3px);
-    }
-    .comic-item .cover{
-        height: 180px;
-    }
+.image span{
+    position: absolute;
+    left: 0;
+    top: 47%;
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    color: #fff;
 }
-@media screen and (max-width:400px){
-    .comic-item .cover{
-        height: 165px;
-    }
+.image img{
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: brightness(0);
 }
-@media screen and (max-width:500px){
-    .body{
-        padding: 20px 2%;
-    }
+.image canvas{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.loading-icon{
+    width: 50px;
+    height: 50px;
+    margin: 30px auto;
+    border-radius: 50%;
+    border: 5px solid #fdd8e0;
+    border-top-color: #fc7c92;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

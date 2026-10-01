@@ -1,7 +1,7 @@
 import { jmApi } from "../api/JmcomicApi.js";
+import { ChapterManager } from "../components/general/ChapterManager.js";
 import { NavManager } from "../components/general/NavManager.js";
 import { setting } from "../components/general/Setting.js";
-import { SwitchServerBtnManager } from "../components/general/SwitchServerBtnManager.js";
 import { SearchContainerManager } from "../components/search/SearchContainerManager.js";
 
 class SearchPage {
@@ -9,6 +9,7 @@ class SearchPage {
     searchContainerManager
     searchQuery
     switchServerBtnManager
+    chapterManager
     constructor() {}
     async init() {
         const sq = new URLSearchParams(location.search).get("sq");
@@ -18,13 +19,14 @@ class SearchPage {
         this.searchQuery = sq;
         setting.init()
         await jmApi.init();
-        const searchContainerManager=new SearchContainerManager(this.searchQuery)
-        searchContainerManager.init()
+        this.searchContainerManager=new SearchContainerManager(this.searchQuery)
 
         this.navManager=new NavManager()
-        this.navManager.init()
-        this.switchServerBtnManager=new SwitchServerBtnManager()
-        this.switchServerBtnManager.init()
+        this.chapterManager=new ChapterManager()
+
+        this.searchContainerManager.onClickComicItem=(e)=>{
+            this.chapterManager.openChapter(e.target.parentNode.dataset.id)
+        }
     }
 }
 const app = new SearchPage();
